@@ -34,3 +34,7 @@ Test jobs may be disabled by setting environment variables:
 - review: REVIEW_DISABLED
 - stop_review: REVIEW_DISABLED
 ```
+
+I'm to lazy to separate .gitlab-ci.yaml file to parts. It should be used with include like this: <https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab-ci.yml>
+
+If anyone can separate this file, please create PR.
