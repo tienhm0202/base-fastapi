@@ -15,7 +15,9 @@ def init_app(app: FastAPI) -> None:
 
 def init_csrf(app: FastAPI) -> None:
     if settings.SECURITY_CSRF:
-        app.add_middleware(CSRFMiddleware, allowed_hosts=[settings.SERVER_HOST])
+        app.add_middleware(
+            CSRFMiddleware, allowed_hosts=[settings.SERVER_HOST]
+        )
 
 
 def init_cors(app: FastAPI) -> None:
