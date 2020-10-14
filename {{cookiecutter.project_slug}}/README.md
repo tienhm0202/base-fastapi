@@ -1,5 +1,7 @@
 # {{cookiecutter.project_name}}
 
+[![pipeline status]({{cookiecutter.project_git_path}}/badges/master/pipeline.svg)]({{cookiecutter.project_git_path}}/commits/master) [![coverage report]({{cookiecutter.project_git_path}}/badges/master/coverage.svg)]({{cookiecutter.project_git_path}}/commits/master) [![python version](https://img.shields.io/badge/python-3.7-blue.svg)]({{cookiecutter.project_git_path}}/commits/master) [![document](https://img.shields.io/badge/document-OpenAPI-green.svg)]({{cookiecutter.project_git_path}}/commits/master)
+
 **Version**: {{cookiecutter.project_version}}
 
 {{cookiecutter.project_short_description}}

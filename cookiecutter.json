@@ -10,5 +10,6 @@
   "postgres_user": "postgres",
   "postgres_pass": "postgres",
   "postgres_db": "postgres",
-  "sentry_dsn": "sentry_dsn"
+  "sentry_dsn": "sentry_dsn",
+  "project_git_path": "https://github.com/tienhm0202/base-fastapi"
  }
