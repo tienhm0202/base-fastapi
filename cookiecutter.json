@@ -9,7 +9,7 @@
   "postgres_host": "localhost",
   "postgres_user": "postgres",
   "postgres_pass": "postgres",
-  "postgres_db": "postgres",
+  "postgres_db": "{{cookiecutter.project_slug}}",
   "sentry_dsn": "sentry_dsn",
   "project_git_path": "https://github.com/tienhm0202/base-fastapi"
  }
