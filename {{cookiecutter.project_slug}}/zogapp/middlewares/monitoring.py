@@ -1,6 +1,7 @@
 import sentry_sdk
 from fastapi import FastAPI
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
+from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 from starlette_prometheus import PrometheusMiddleware, metrics
 
 from zogapp import settings
@@ -17,7 +18,9 @@ def init_sentry(app: FastAPI) -> None:
                         release=settings.SERVER_VERSION,
                         server_name=settings.SERVER_NAME,
                         environment=settings.SERVER_ENV,
-                        in_app_include=settings.SENTRY_INCLUDE)
+                        in_app_include=settings.SENTRY_INCLUDE,
+                        traces_sample_rate=settings.SENTRY_SAMPLE_RATE,
+                        integrations=[SqlalchemyIntegration()])
         app.add_middleware(SentryAsgiMiddleware)
 
 

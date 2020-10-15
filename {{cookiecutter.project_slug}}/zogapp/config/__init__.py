@@ -18,6 +18,7 @@ class Settings(BaseSettings):
 
     SENTRY_DSN: Optional[HttpUrl] = None
     SENTRY_INCLUDE: Optional[List[str]] = ["zogapp"]
+    SENTRY_SAMPLE_RATE: Optional[float] = 0.5
 
     POSTGRES_HOST: str
     POSTGRES_USER: str
