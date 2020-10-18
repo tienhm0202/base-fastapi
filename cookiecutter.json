@@ -11,5 +11,8 @@
   "postgres_user": "postgres",
   "postgres_pass": "postgres",
   "postgres_db": "{{cookiecutter.project_slug}}",
-  "sentry_dsn": "sentry_dsn"
+  "sentry_dsn": "sentry_dsn",
+  "docker_url": "{{cookiecutter.docker_url}}",
+  "docker_group": "{{cookiecutter.docker_group}}",
+  "docker_image": "{{cookiecutter.project_slug}}"
  }
