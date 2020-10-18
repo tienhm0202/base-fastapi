@@ -1,14 +1,21 @@
+from datetime import datetime
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
+import pytz
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import Session
 
+from zogapp import settings
+
 
 @as_declarative()
 class Base:
     id: Any
+    created_at: datetime
+    updated_at: Optional[datetime]
+    is_deleted: int = 0
     __name__: str
 
     # Generate __tablename__ automatically
@@ -49,6 +56,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
         obj_in_data = jsonable_encoder(obj_in)
         db_obj = self.model(**obj_in_data)  # type: ignore
+        db_obj.created_at = datetime.now(tz=pytz.timezone(settings.SERVER_TZ))
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
@@ -65,13 +73,23 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         for field in obj_data:
             if field in update_data:
                 setattr(db_obj, field, update_data[field])
+        db_obj.updated_at = datetime.now(tz=pytz.timezone(settings.SERVER_TZ))
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
         return db_obj
 
-    def remove(self, db: Session, *, id: int) -> ModelType:
+    def remove(self, db: Session, *, id: int,
+               soft_delete: bool = True) -> ModelType:
         obj = db.query(self.model).get(id)
-        db.delete(obj)
-        db.commit()
+
+        if soft_delete:
+            obj.is_deleted = 1
+            obj.updated_at = datetime.now(tz=pytz.timezone(settings.SERVER_TZ))
+            db.add(obj)
+            db.commit()
+            db.refresh(obj)
+        else:
+            db.delete(obj)
+            db.commit()
         return obj

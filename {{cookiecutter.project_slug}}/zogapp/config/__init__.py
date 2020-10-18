@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     SERVER_HOST: AnyHttpUrl
     SERVER_VERSION: str
     SERVER_ENV: str
+    SERVER_TZ: str = "Asia/Ho_Chi_Minh"
     LOG_LEVEL: str = "DEBUG"
 
     SENTRY_DSN: Optional[HttpUrl] = None
