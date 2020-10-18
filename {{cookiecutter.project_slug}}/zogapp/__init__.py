@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from .config import settings
-from . import middlewares
+from . import middlewares, modules
 
 
 def create_app() -> FastAPI:
@@ -11,4 +11,5 @@ def create_app() -> FastAPI:
     )
 
     middlewares.init_app(my_app)
+    modules.init_app(my_app)
     return my_app
