@@ -18,23 +18,12 @@ Goto: Settings --> CI/CD --> Variables Add: BUILDPACK_URL: <https://github.com/t
 
 Remember to change `project_git_path` to your Gitlab repo: such as <https://gitlab.com/tienhm0202/base-fastapi.git>
 
-## 4\. Gitlab CI config
+## 4\. New module
 
-Test jobs may be disabled by setting environment variables:
-
-```
-- test: TEST_DISABLED
-- code_quality: CODE_QUALITY_DISABLED
-- license_management: LICENSE_MANAGEMENT_DISABLED
-- performance: PERFORMANCE_DISABLED
-- sast: SAST_DISABLED
-- dependency_scanning: DEPENDENCY_SCANNING_DISABLED
-- container_scanning: CONTAINER_SCANNING_DISABLED
-- dast: DAST_DISABLED
-- review: REVIEW_DISABLED
-- stop_review: REVIEW_DISABLED
+```bash
+make module
 ```
 
-I'm to lazy to separate .gitlab-ci.yaml file to parts. It should be used with include like this: <https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab-ci.yml>
+When be asked `module_name`, remember to add singular, lower module name.
 
-If anyone can separate this file, please create PR.
+Eg: user, merchant ...
