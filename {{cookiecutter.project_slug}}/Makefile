@@ -27,6 +27,9 @@ test:
 run:
 	uvicorn main:app
 
+module:
+	cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o zogapp/modules/
+
 docker-build:
     export DOCKER_IMAGE={{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
 	docker build -t ${DOCKER_IMAGE} .
