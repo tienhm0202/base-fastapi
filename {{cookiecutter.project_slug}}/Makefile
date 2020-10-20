@@ -27,6 +27,10 @@ test:
 run:
 	uvicorn main:app
 
+nginx_deploy:
+	cp zogvn_users.nginx.conf /etc/nginx/sites-available/zogvn_users.nginx.conf
+	nginx_ensite zogvn_users.nginx.conf
+
 module:
 	cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o zogapp/modules/
 
