@@ -14,5 +14,6 @@
   "sentry_dsn": "sentry_dsn",
   "docker_url": "{{cookiecutter.docker_url}}",
   "docker_group": "{{cookiecutter.docker_group}}",
-  "docker_image": "{{cookiecutter.project_slug}}"
+  "docker_image": "{{cookiecutter.project_slug}}",
+  "server_port": "{{cookiecutter.server_port}}"
  }
