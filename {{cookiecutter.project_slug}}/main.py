@@ -1,3 +1,3 @@
-import zogapp
+import src
 
-app = zogapp.create_app()
+app = src.create_app()

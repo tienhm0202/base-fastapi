@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "DEBUG"
 
     SENTRY_DSN: Optional[HttpUrl] = None
-    SENTRY_INCLUDE: Optional[List[str]] = ["zogapp"]
+    SENTRY_INCLUDE: Optional[List[str]] = ["src"]
     SENTRY_SAMPLE_RATE: Optional[float] = 0.5
 
     POSTGRES_HOST: str

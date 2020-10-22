@@ -8,7 +8,7 @@ from sqlalchemy import MetaData
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import Session
 
-from zogapp import settings
+from src import settings
 
 convention = {
     "ix": 'ix_%(column_0_label)s',

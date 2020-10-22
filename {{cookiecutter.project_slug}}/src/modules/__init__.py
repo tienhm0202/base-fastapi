@@ -1,6 +1,6 @@
 from fastapi import APIRouter, FastAPI
 
-from zogapp import settings
+from src import settings
 
 # Add modules in here
 load_modules = []
