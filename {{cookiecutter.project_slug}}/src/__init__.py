@@ -1,7 +1,8 @@
 from fastapi import FastAPI
+from zogutils import middlewares
 
 from .config import settings
-from . import middlewares, modules
+from . import modules
 
 
 def create_app() -> FastAPI:
@@ -10,6 +11,6 @@ def create_app() -> FastAPI:
         openapi_url=f"{settings.API_V1_STR}/openapi.json"
     )
 
-    middlewares.init_app(my_app)
+    middlewares.init_app(my_app, settings)
     modules.init_app(my_app)
     return my_app
