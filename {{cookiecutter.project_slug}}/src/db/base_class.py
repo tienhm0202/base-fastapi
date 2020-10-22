@@ -94,7 +94,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     def remove(self, db: Session, *, id: int,
                soft_delete: bool = True) -> ModelType:
-        obj = db.query(self.model).filter(self.model.hash_id == id).first()
+        obj = db.query(self.model).filter(self.model.id == id).first()
 
         if soft_delete:
             obj.is_deleted = 1
