@@ -22,6 +22,7 @@ typer = "0.3.2"
 piccolo-api = "0.11.0"
 starlette-prometheus = "0.7.0"
 pytz = "^2020.1"
+zogvn_utils = "0.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "6.1.0"
