@@ -4,11 +4,12 @@ from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 import pytz
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
-from sqlalchemy import MetaData
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
+from sqlalchemy import MetaData, Column, Integer, DateTime, String
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
 from src import settings
+from src.utils import get_db_id
 
 convention = {
     "ix": 'ix_%(column_0_label)s',
@@ -19,21 +20,16 @@ convention = {
 }
 
 metadata = MetaData(naming_convention=convention)
+_Base = declarative_base(metadata=metadata)
 
 
-@as_declarative(metadata=metadata)
-class Base:
-    id: Any
-    created_at: datetime
-    updated_at: Optional[datetime]
-    is_deleted: int = 0
-    __name__: str
+class Base(_Base):
+    __abstract__ = True
 
-    # Generate __tablename__ automatically
-    @classmethod
-    @declared_attr
-    def __tablename__(cls) -> str:
-        return cls.__name__.lower()
+    id = Column(String, primary_key=True, default=lambda: get_db_id())
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
+    is_deleted = Column(Integer, default=0)
 
 
 ModelType = TypeVar("ModelType", bound=Base)
@@ -64,6 +60,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
                   limit: int = 100) -> List[ModelType]:
         return db.query(self.model).offset(skip).limit(limit).all()
 
+    def get_by(self, db: Session, condition: dict) -> List[ModelType]:
+        return db.query(self.model).filter_by(**condition).all()
+
+    def get_one(self, db: Session, condition: dict) -> List[ModelType]:
+        return db.query(self.model).filter_by(**condition).first()
+
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
         obj_in_data = jsonable_encoder(obj_in)
         db_obj = self.model(**obj_in_data)  # type: ignore
@@ -92,7 +94,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     def remove(self, db: Session, *, id: int,
                soft_delete: bool = True) -> ModelType:
-        obj = db.query(self.model).get(id)
+        obj = db.query(self.model).filter(self.model.hash_id == id).first()
 
         if soft_delete:
             obj.is_deleted = 1
