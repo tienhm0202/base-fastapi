@@ -19,20 +19,20 @@ miggen:
 	python cli.py $(name)
 
 lint:
-	flake8 zogapp/
+	flake8 src/
 
 test:
 	pytest
 
 run:
-	uvicorn main:app
+	sh entrypoint.sh
 
 nginx_deploy:
-	cp zogvn_users.nginx.conf /etc/nginx/sites-available/zogvn_users.nginx.conf
-	nginx_ensite zogvn_users.nginx.conf
+	cp zogvn_users.nginx.conf /etc/nginx/sites-available/{{cookiecutter.project_slug}}.nginx.conf
+	nginx_ensite {{cookiecutter.project_slug}}.nginx.conf
 
 module:
-	cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o zogapp/modules/
+	cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o src/modules/
 
 docker-build:
     export DOCKER_IMAGE={{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
@@ -41,7 +41,7 @@ docker-build:
 docker-run:
     export DOCKER_IMAGE={{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
 	make docker-build version=$(version)
-	docker run --network=zog -d --name zog-users -p 5000:5000 -e POSTGRES_HOST=postgres ${DOCKER_IMAGE}
+	docker run --network=zog -d --name {{cookiecutter.project_slug}} -p 5000:5000 -e POSTGRES_HOST=postgres ${DOCKER_IMAGE}
 
 db:
 	docker run --network=zog -d --name postgres -e POSTGRES_USER={{cookiecutter.postgres_user}} -e POSTGRES_PASSWORD={{cookiecutter.postgres_pass}} -e POSTGRES_DB={{cookiecutter.postgres_db}} -p 5432:5432 -d postgres
