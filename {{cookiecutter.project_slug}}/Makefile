@@ -28,7 +28,7 @@ run:
 	sh entrypoint.sh
 
 nginx_deploy:
-	cp zogvn_users.nginx.conf /etc/nginx/sites-available/{{cookiecutter.project_slug}}.nginx.conf
+	cp deployments/nginx/{{cookiecutter.project_slug}}.nginx.conf /etc/nginx/sites-available/{{cookiecutter.project_slug}}.nginx.conf
 	nginx_ensite {{cookiecutter.project_slug}}.nginx.conf
 
 module:
