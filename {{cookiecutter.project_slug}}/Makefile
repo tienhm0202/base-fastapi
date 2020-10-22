@@ -10,10 +10,10 @@ buildclean:
 	rm -rf .pytest_cache/
 
 migrate:
-	alembic upgrade head
+	env PYTHONPATH=. alembic upgrade head
 
 downgrade:
-	alembic downgrade -1
+	env PYTHONPATH=. alembic downgrade -1
 
 miggen:
 	python cli.py $(name)
