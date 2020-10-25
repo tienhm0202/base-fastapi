@@ -95,6 +95,23 @@ class Settings(BaseSettings):
             return v
         return os.getenv("hostname")
 
+    def update_os_env(self):
+        for key, value in os.environ.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+
+        self._generate_sql_alchemy_uri()
+
+    def _generate_sql_alchemy_uri(self):
+        self.SQLALCHEMY_DATABASE_URI = PostgresDsn.build(
+            scheme="postgresql",
+            user=self.POSTGRES_USER,
+            password=self.POSTGRES_PASS,
+            host=self.POSTGRES_HOST,
+            port=self.POSTGRES_PORT,
+            path=f"/{self.POSTGRES_DB or ''}",
+        )
+
     class Config:
         case_sensitive = True
         env_file = ".env"
@@ -102,7 +119,9 @@ class Settings(BaseSettings):
 
 @lru_cache(maxsize=128)
 def get_settings() -> Settings:
-    return Settings()
+    new_settings = Settings()
+    new_settings.update_os_env()
+    return new_settings
 
 
 settings = get_settings()
