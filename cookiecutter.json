@@ -12,9 +12,10 @@
   "postgres_pass": "postgres",
   "postgres_db": "{{cookiecutter.project_slug}}",
   "sentry_dsn": "sentry_dsn",
-  "docker_url": "{{cookiecutter.docker_url}}",
-  "docker_group": "{{cookiecutter.docker_group}}",
-  "docker_image": "{{cookiecutter.project_slug}}",
-  "server_host": "{{cookiecutter.server_host}}",
-  "server_port": "{{cookiecutter.server_port}}"
+  "docker_url": "docker.yourhost.vn",
+  "docker_group": "group",
+  "docker_image": "service",
+  "server_host": "http://domain.vn",
+  "server_port": "1234",
+  "gitlab_pypi_id": "1234567"
  }

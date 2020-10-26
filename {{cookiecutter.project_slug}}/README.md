@@ -6,6 +6,14 @@
 
 {{cookiecutter.project_short_description}}
 
+## To init private pypi (Gitlab)
+
+```
+$ poetry config repositories.zog https://gitlab.com/api/v4/projects/<project_id>/packages/pypi
+$ poetry config http_basic.zog <username> <token>
+$ export PIP_EXTRA_INDEX_URL=https://__token__:<token>@gitlab.com/api/v4/projects/<project_id>/packages/pypi/simple
+```
+
 ## Usage
 
 ```bash

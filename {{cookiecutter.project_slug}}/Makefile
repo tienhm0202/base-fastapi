@@ -31,17 +31,18 @@ nginx_deploy:
 	cp deployments/nginx/{{cookiecutter.project_slug}}.nginx.conf /etc/nginx/sites-available/{{cookiecutter.project_slug}}.nginx.conf
 	nginx_ensite {{cookiecutter.project_slug}}.nginx.conf
 
-module:
+module_fisrt:
 	cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o src/modules/
 
-docker-build:
-    export DOCKER_IMAGE={{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
-	docker build -t ${DOCKER_IMAGE} .
+module:
+	cookiecutter base-fastapi-modules -o src/modules/
 
-docker-run:
-    export DOCKER_IMAGE={{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
-	make docker-build version=$(version)
-	docker run --network=zog -d --name {{cookiecutter.project_slug}} -p 5000:5000 -e POSTGRES_HOST=postgres ${DOCKER_IMAGE}
+docker_build:
+	docker build -t {{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version) .
+
+docker_run:
+	make docker_build version=$(version)
+	docker run --network=zog -d --name {{cookiecutter.project_slug}} -p 5000:5000 -e POSTGRES_HOST=postgres {{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
 
 db:
 	docker run --network=zog -d --name postgres -e POSTGRES_USER={{cookiecutter.postgres_user}} -e POSTGRES_PASSWORD={{cookiecutter.postgres_pass}} -e POSTGRES_DB={{cookiecutter.postgres_db}} -p 5432:5432 -d postgres
