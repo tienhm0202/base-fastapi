@@ -16,6 +16,8 @@
   "docker_group": "group",
   "docker_image": "service",
   "server_host": "http://domain.vn",
-  "server_port": "1234",
-  "gitlab_pypi_id": "1234567"
+  "server_port": "",
+  "gitlab_pypi_id": "22017740",
+  "gitlab_pypi_user": "user",
+  "gitlab_pypi_token": "token"
  }
