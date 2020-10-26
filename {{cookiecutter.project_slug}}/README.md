@@ -10,8 +10,8 @@
 
 ```
 $ poetry config repositories.zog https://gitlab.com/api/v4/projects/{{cookiecutter.gitlab_pypi_id}}/packages/pypi
-$ poetry config http_basic.zog {{cookiecutter.gitlab_pypi_user}} {{cookiecutter.gitlab_pypi_token}}
-$ export PIP_EXTRA_INDEX_URL=https://__token__:{{cookiecutter.gitlab_pypi_token}}@gitlab.com/api/v4/projects/{{cookiecutter.gitlab_pypi_id}}/packages/pypi/simple
+$ poetry config http_basic.zog <username> <token>
+$ export PIP_EXTRA_INDEX_URL=https://__token__:<token>@gitlab.com/api/v4/projects/{{cookiecutter.gitlab_pypi_id}}/packages/pypi/simple
 ```
 
 ## Usage
