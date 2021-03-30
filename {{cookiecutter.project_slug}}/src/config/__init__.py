@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASS: str
     POSTGRES_DB: str
-    POSTGRES_PORT: Optional[int] = 5432
+    POSTGRES_PORT: Optional[str] = 5432
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
 
     SECURITY_CSRF: bool = False
