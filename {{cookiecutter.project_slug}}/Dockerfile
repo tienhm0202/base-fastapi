@@ -11,7 +11,7 @@ COPY ./poetry.lock* ./
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 
-COPY .prestart.sh ./
+COPY ./restart.sh ./
 COPY . ./
 RUN find . -type f -name "*.py[co]" -delete
 RUN find . -type d -name "__pycache__" -delete
