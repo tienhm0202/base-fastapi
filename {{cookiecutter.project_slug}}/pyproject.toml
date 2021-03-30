@@ -22,7 +22,7 @@ python-dotenv = "0.14.0"
 typer = "0.3.2"
 pytz = "^2020.1"
 pydantic_sqlalchemy = "^0.0.7"
-zogutils = "1.0.0"
+zogutils = "1.5.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "6.1.0"
