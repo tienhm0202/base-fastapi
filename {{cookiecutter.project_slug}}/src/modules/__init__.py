@@ -1,6 +1,6 @@
 from fastapi import APIRouter, FastAPI
 
-from src import settings
+from src.config import settings
 
 # Add modules in here
 load_modules = []
