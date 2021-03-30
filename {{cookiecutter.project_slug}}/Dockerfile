@@ -1,18 +1,17 @@
-FROM python:3.7.7
+FROM tienhm/uvicorn-gunicorn-fastapi:python3.7-slim
 
-WORKDIR /home/app
+LABEL maintainer="Hoang Manh Tien <tienhm.0202@gmail.com>"
 
-RUN pip install gunicorn
-RUN pip install uvloop
-RUN pip install poetry
-ADD ./pyproject.toml ./pyproject.toml
+ARG PIP_EXTRA_INDEX_URL
+
+WORKDIR /app
+
+COPY ./pyproject.toml ./
+COPY ./poetry.lock* ./
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 
+COPY .prestart.sh ./
+COPY . ./
 RUN find . -type f -name "*.py[co]" -delete
 RUN find . -type d -name "__pycache__" -delete
-ADD . ./
-
-EXPOSE 5000
-
-CMD ["./entrypoint.sh"]
