@@ -15,7 +15,6 @@
   "docker_url": "docker.yourhost.vn",
   "docker_group": "group",
   "docker_image": "service",
-  "server_host": "http://domain.vn",
-  "server_port": "",
-  "gitlab_pypi_id": "22017740"
+  "server_host": "localhost",
+  "server_port": "5000"
  }
