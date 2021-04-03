@@ -28,11 +28,15 @@ zogutils = "1.5.1"
 pytest = "6.1.0"
 pytest-cov = "2.10.1"
 flake8 = "3.8.3"
+yapf = "^0.31.0"
+rope = "^0.18.0"
+bandit = "^1.7.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
-[[tool.poetry.source]]
-name = "zoglib"
-url = "https://gitlab.com/api/v4/projects/{{cookiecutter.gitlab_pypi_id}}/packages/pypi/simple"
+[tool.yapf]
+based_on_style = "google"
+spaces_before_comment = 4
+split_before_logical_operator = true
