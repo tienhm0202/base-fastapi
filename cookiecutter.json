@@ -15,6 +15,6 @@
   "docker_url": "docker.yourhost.vn",
   "docker_group": "group",
   "docker_image": "service",
-  "server_host": "localhost",
-  "server_port": "5000"
+  "server_host": "yourdomain.vn",
+  "server_port": ""
  }

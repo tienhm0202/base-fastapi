@@ -11,12 +11,18 @@ buildclean:
 
 migrate:
 	env PYTHONPATH=. alembic upgrade head
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
 
 downgrade:
 	env PYTHONPATH=. alembic downgrade -1
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
 
 miggen:
 	python cli.py $(name)
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
 
 lint:
 	flake8 src/
@@ -39,10 +45,19 @@ module:
 
 docker_build:
 	docker build -t {{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version) .
+	docker image prune -f
+
+docker_push:
+	docker push {{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
 
 docker_run:
+	docker rm -vf {{cookiecutter.project_slug}}
 	make docker_build version=$(version)
 	docker run --network=zog -d --name {{cookiecutter.project_slug}} -p 5000:80 -e POSTGRES_HOST=postgres {{cookiecutter.docker_url}}/{{cookiecutter.docker_group}}/{{cookiecutter.docker_image}}:$(version)
 
 db:
 	docker run --network=zog -d --name postgres -e POSTGRES_USER={{cookiecutter.postgres_user}} -e POSTGRES_PASSWORD={{cookiecutter.postgres_pass}} -e POSTGRES_DB={{cookiecutter.postgres_db}} -p 5432:5432 -d postgres
+
+release:
+	heroku container:push -a {{cookiecutter.docker_group}} web
+	heroku container:release -a {{cookiecutter.docker_group}} web
