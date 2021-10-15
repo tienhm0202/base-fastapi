@@ -1,4 +1,4 @@
-FROM tienhm/uvicorn-gunicorn-fastapi:python3.7-slim
+FROM tienhm/uvicorn-gunicorn-fastapi:python3.8-slim
 
 LABEL maintainer="Hoang Manh Tien <tienhm.0202@gmail.com>"
 
