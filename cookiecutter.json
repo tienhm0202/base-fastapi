@@ -16,5 +16,5 @@
   "docker_group": "group",
   "docker_image": "service",
   "server_host": "yourdomain.vn",
-  "server_port": ""
+  "server_port": "running port for Docker"
  }
