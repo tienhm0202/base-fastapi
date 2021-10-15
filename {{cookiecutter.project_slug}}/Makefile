@@ -37,7 +37,7 @@ nginx_deploy:
 	cp deployments/nginx/{{cookiecutter.project_slug}}.nginx.conf /etc/nginx/sites-available/{{cookiecutter.project_slug}}.nginx.conf
 	nginx_ensite {{cookiecutter.project_slug}}.nginx.conf
 
-module_fisrt:
+module_first:
 	cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o src/modules/
 
 module:
