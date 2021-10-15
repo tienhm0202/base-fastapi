@@ -7,7 +7,7 @@ readme = "README.md"
 repository = "{{cookiecutter.project_git_path}}"
 
 [tool.poetry.dependencies]
-python = "3.8.10"
+python = "3.8.*"
 uvicorn = "0.12.1"
 fastapi = "0.70.0"
 ujson = "3.2.0"
