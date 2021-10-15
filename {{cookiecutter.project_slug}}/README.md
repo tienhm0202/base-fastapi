@@ -6,14 +6,6 @@
 
 {{cookiecutter.project_short_description}}
 
-## To init private pypi (Gitlab)
-
-```
-$ poetry config repositories.<repo name> https://gitlab.com/api/v4/projects/{{cookiecutter.gitlab_pypi_id}}/packages/pypi
-$ poetry config http-basic.<repo name> <username> <token>
-$ export PIP_EXTRA_INDEX_URL=https://__token__:<token>@gitlab.com/api/v4/projects/{{cookiecutter.gitlab_pypi_id}}/packages/pypi/simple
-```
-
 ## Usage
 
 ```bash
