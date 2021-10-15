@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from zogutils import middlewares
+from utils import middlewares
 
 
 from . import modules

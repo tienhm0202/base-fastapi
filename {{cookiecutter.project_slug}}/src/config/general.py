@@ -19,8 +19,6 @@ class Settings(_MyBase):
     TOKEN_EXPIRES: int = 30
     LOG_LEVEL: str = "DEBUG"
 
-    FRONTEND_URL: AnyHttpUrl
-    BANNER_IMG: AnyHttpUrl
     PRODUCT_NAME: str
 
     SENTRY_DSN: Optional[HttpUrl] = None

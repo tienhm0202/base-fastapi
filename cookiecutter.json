@@ -2,6 +2,7 @@
   "full_name": "Hoang Manh Tien",
   "email": "tienhm.0202@gmail.com",
   "github_username": "tienhm0202",
+  "product_name": "Facebook",
   "project_name": "Backend FastAPI Postgres",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "Default FastAPI project backend with clean architect",
