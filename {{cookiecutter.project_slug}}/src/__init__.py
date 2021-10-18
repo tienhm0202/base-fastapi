@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from utils import middlewares
 
 
 from . import modules
 from .config import settings
+from .utils import middlewares
 
 
 def create_app() -> FastAPI:
