@@ -8,6 +8,7 @@ buildclean:
 	rm -rf *.egg-info
 	rm -rf htmlcov/
 	rm -rf .pytest_cache/
+	rm .coverage coverage.xml
 
 migrate:
 	env PYTHONPATH=. alembic upgrade head
@@ -29,6 +30,11 @@ lint:
 
 test:
 	pytest
+
+check:
+	flake8 src/
+	bandit -r src/
+	pytest tests/
 
 run:
 	sh entrypoint.sh
