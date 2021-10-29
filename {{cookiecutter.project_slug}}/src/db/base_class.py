@@ -2,6 +2,8 @@ from datetime import datetime
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
 import pytz
+
+from fastapi.encoders import jsonable_encoder
 from dictalchemy import DictableModel
 from pydantic import BaseModel
 from sqlalchemy import MetaData, Column, Integer, DateTime, String
@@ -67,7 +69,8 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return db.query(self.model).filter_by(**condition).first()
 
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
-        db_obj = self.model(**obj_in)  # type: ignore
+        obj_in_data = jsonable_encoder(obj_in)
+        db_obj = self.model(**obj_in_data)  # type: ignore
         db_obj.created_at = datetime.now(tz=pytz.timezone(settings.SERVER_TZ))
         db.add(db_obj)
         db.commit()
@@ -77,11 +80,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     @staticmethod
     def update(db: Session, *, db_obj: ModelType,
                obj_in: Union[UpdateSchemaType, Dict[str, Any]]) -> ModelType:
+        obj_data = jsonable_encoder(db_obj)
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:
             update_data = obj_in.dict(exclude_unset=True)
-        for field in db_obj.__dict__.keys():
+        for field in obj_data.keys():
             if field in update_data.keys():
                 setattr(db_obj, field, update_data[field])
         db_obj.updated_at = datetime.now(tz=pytz.timezone(settings.SERVER_TZ))
