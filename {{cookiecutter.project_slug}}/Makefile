@@ -1,43 +1,26 @@
 pyclean:
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
+	bash scripts/pyclean
 
 buildclean:
-	rm -rf build/
-	rm -rf dist/
-	rm -rf *.egg-info
-	rm -rf htmlcov/
-	rm -rf .pytest_cache/
-	rm .coverage coverage.xml
+	bash scripts/buildclean
 
 migrate:
-	env PYTHONPATH=. alembic upgrade head
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
+	bash scripts/migrate
 
 downgrade:
-	env PYTHONPATH=. alembic downgrade -1
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
+	bash scripts/downgrade
 
 miggen:
 	python cli.py $(name)
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
+	bash scripts/pyclean
 
 lint:
-	flake8 src/
+	bash scripts/lint
 
-test:
-	pytest
+test: 
+	bash scripts/test
 
-check:
-	flake8 src/
-	bandit -r src/
-	pytest tests/
-
-run:
-	sh entrypoint.sh
+check: | lint test
 
 nginx_deploy:
 	cp deployments/nginx/{{cookiecutter.project_slug}}.nginx.conf /etc/nginx/sites-available/{{cookiecutter.project_slug}}.nginx.conf

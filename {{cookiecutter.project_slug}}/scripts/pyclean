@@ -1,0 +1,8 @@
+#!/bin/bash
+
+bash scripts/print_title "Running Python cleaner"
+
+set -ex
+
+find . -type f -name "*.py[co]" -delete
+find . -type d -name "__pycache__" -delete

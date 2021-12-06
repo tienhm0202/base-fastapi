@@ -1,0 +1,12 @@
+#! /bin/bash
+
+bash scripts/print_title "Running Build cleaner"
+
+set -ex
+
+rm -rf build/
+rm -rf dist/
+rm -rf *.egg-info
+rm -rf htmlcov/
+rm -rf .pytest_cache/
+rm .coverage coverage.xml

@@ -1,0 +1,8 @@
+#! /bin/bash
+
+bash scripts/print_title "Running DB migrate"
+
+set -ex
+
+env PYTHONPATH=. alembic upgrade head
+bash scripts/pyclean
