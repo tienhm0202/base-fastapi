@@ -14,7 +14,7 @@ def miggen(name: str):
     result = None
     if list_of_files:
         latest_file = max(list_of_files, key=os.path.getctime)
-        pattern = r"([0-9]+)\-.*"
+        pattern = r"([0-9]+)\_.*"
         result = re.search(pattern, latest_file)
     if not result:
         name = "00001_%s" % name
