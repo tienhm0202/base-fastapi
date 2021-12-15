@@ -21,6 +21,7 @@ def miggen(name: str):
     else:
         prefix = str(int(result[1]) + 1).zfill(5)
         name = "%s_%s" % (prefix, name)
+    name = name[:31] if len(name) > 32 else name
     print("Generating ", name)
     subprocess.call([
         "env", "PYTHONPATH=.", "alembic", "revision",
