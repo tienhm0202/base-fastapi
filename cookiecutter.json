@@ -8,7 +8,7 @@
   "project_short_description": "Default FastAPI project backend with clean architect",
   "project_version": "0.1.0",
   "project_git_path": "https://github.com/tienhm0202/base-fastapi",
-  "postgres_host": "localhost",
+  "postgres_host": "postgres",
   "postgres_user": "postgres",
   "postgres_pass": "postgres",
   "postgres_db": "{{cookiecutter.project_slug}}",
