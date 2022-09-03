@@ -6,6 +6,10 @@ authors = ["{{cookiecutter.full_name}} <{{cookiecutter.email}}>"]
 readme = "README.md"
 repository = "{{cookiecutter.project_git_path}}"
 
+packages = [
+    { include = "src" },
+]
+
 [tool.poetry.dependencies]
 python = "3.8.*"
 ujson = "3.2.0"
