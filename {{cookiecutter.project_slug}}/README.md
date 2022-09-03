@@ -10,28 +10,29 @@
 
 ```bash
 # To run lint
-$ make lint
+$ cli make lint
 
 # To run test
-$ make test
-
-# To run app
-$ make run
+$ cli make test
 
 # Migrate alembic
-$ make migrate
+$ cli db migrate
 
 # Downgrade alembic
-$ make downgrade
+$ cli db downgrade
 
 # Run local database (Docker required)
-$ make db
+$ cli docker db
 
 # Generate new migrations
-$ make miggen name="init_users_table"
+$ cli db miggen "init_users_table"
 ```
 
-For more detail, check Makefile
+For more detail, check
+
+```bash
+$ cli --help
+```
 
 ## Authors
 
