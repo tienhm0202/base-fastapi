@@ -53,5 +53,6 @@ def miggen(name: str):
         "env PYTHONPATH=. alembic revision --autogenerate --rev-id {id}"
         .format(id=trim_name)
     ]
+    pyclean(out=0)
     run_commands(commands)
     pyclean(out=0)
