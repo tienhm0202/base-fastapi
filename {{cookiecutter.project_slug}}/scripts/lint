@@ -1,6 +1,0 @@
-#! /bin/bash
-
-bash scripts/print_title "Running lint"
-
-flake8 src/
-bandit -r src/

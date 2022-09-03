@@ -1,8 +1,0 @@
-#! /bin/bash
-
-bash scripts/print_title "Running DB downgrade"
-
-set -ex
-
-env PYTHONPATH=. alembic downgrade -1
-bash scripts/pyclean
