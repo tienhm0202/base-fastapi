@@ -74,12 +74,12 @@ def check():
 @app.command()
 def module_first():
     """Init module at first time or in case pulling new code"""
-    commands = "cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o src/modules/"  # noqa
+    commands = ["cookiecutter https://github.com/tienhm0202/base-fastapi-modules.git -o src/modules/"]  # noqa
     run_commands(commands)
 
 
 @app.command()
 def module():
     """Init module with existed code based"""
-    commands = "cookiecutter base-fastapi-modules -o src/modules/"
+    commands = ["cookiecutter base-fastapi-modules -o src/modules/"]
     run_commands(commands)
