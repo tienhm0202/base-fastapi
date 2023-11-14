@@ -7,7 +7,7 @@ readme = "README.md"
 repository = "{{cookiecutter.project_git_path}}"
 
 packages = [
-    { include = "src" },
+    { include = "clients" },
 ]
 
 [tool.poetry.dependencies]

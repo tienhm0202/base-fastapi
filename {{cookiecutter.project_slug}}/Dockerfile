@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install git -y && rm -rf /var/lib/apt/lists/*
 COPY ./pyproject.toml ./
 COPY ./poetry.lock* ./
 RUN poetry config virtualenvs.create false
+COPY clients ./clients
+COPY README.md ./README.md
 RUN poetry install --no-interaction --no-ansi
 
 COPY ./prestart.sh ./

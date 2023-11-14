@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-bash scripts/migrate
+cli db migrate

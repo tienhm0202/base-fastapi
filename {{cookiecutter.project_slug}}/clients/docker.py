@@ -37,7 +37,7 @@ def run(tag_version: str = "1.0",
     envs = " ".join(["-e " + e for e in env.split(",")])
 
     commands = [
-        "docker run --network={{cookiecutter.docker_group}} --name {docker_name} {envs} -d {tag_name}:{tag_version}"
+        "docker run --network={{cookiecutter.docker_group}} --name {docker_name} {envs}  -p 8080:80 -d {tag_name}:{tag_version}"
         .format(
             docker_name=docker_name, envs=envs,
             tag_version=tag_version, tag_name=tag_name
